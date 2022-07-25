@@ -40,4 +40,4 @@ Route::get('/follow-list','PostsController@index');
 Route::get('/follower-list','PostsController@index');
 
 // バリデーション
-Route::post('resister', 'RegisterController@validator');
+Route::post('/resister', 'RegisterController@validator');
