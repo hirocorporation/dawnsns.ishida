@@ -28,20 +28,27 @@ Route::post('/register', 'Auth\RegisterController@register');
 
 Route::get('/added', 'Auth\RegisterController@added');
 
+Route::get('/', function () {
+    return view('/auth/login');
+})->name('login');
+
 // ログイン後投稿編集画面へ
-Route::post('/posts/index', 'PostsController@index');
 Route::get('/posts/index', function() {
     // 認証済みのユーザーのみが入れる
 })->middleware('auth');
+Route::post('/posts/index', 'PostsController@index');
+
 
 //ログイン中のページ
-Route::get('/top','PostsController@index');
+Route::group(['middleware' => 'auth'], function() {
+    Route::get('/top','PostsController@index');
 
-Route::get('/profile','UsersController@profile');
+    Route::get('/profile','UsersController@profile');
 
-Route::get('/search','UsersController@index');
+    Route::get('/search','UsersController@index');
 
-Route::get('/follow-list','PostsController@index');
-Route::get('/follower-list','PostsController@index');
+    Route::get('/follow-list','PostsController@index');
+    Route::get('/follower-list','PostsController@index');
 
-Route::get('/logout', 'Auth\LoginController@logout');
+    Route::get('/logout', 'Auth\LoginController@logout');
+});
