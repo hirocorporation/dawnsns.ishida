@@ -28,6 +28,11 @@ Route::post('/register', 'Auth\RegisterController@register');
 
 Route::get('/added', 'Auth\RegisterController@added');
 
+// ログイン後投稿編集画面へ
+Route::post('/posts/index', 'PostsController@index');
+Route::get('/posts/index', function() {
+    // 認証済みのユーザーのみが入れる
+})->middleware('auth');
 
 //ログイン中のページ
 Route::get('/top','PostsController@index');
@@ -39,5 +44,4 @@ Route::get('/search','UsersController@index');
 Route::get('/follow-list','PostsController@index');
 Route::get('/follower-list','PostsController@index');
 
-// バリデーション
-Route::post('/resister', 'RegisterController@validator');
+Route::get('/logout', 'Auth\LoginController@logout');
