@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,22 +20,23 @@
     <!--iphoneのアプリアイコン指定-->
     <link rel="apple-touch-icon-precomposed" href="画像のURL" />
     <!--OGPタグ/twitterカード-->
+
+
+
 </head>
 <body>
     <header>
         <div id = "head">
-        <h1><a><img src="images/logo.png"></a></h1>
-            <div id="">
-                <div id="">
-                    <p>〇〇さん<img src="images/arrow.png"></p>
-                <div>
-                <ul>
-                    <li><a href="/top">ホーム</a></li>
-                    <li><a href="/profile">プロフィール</a></li>
-                    <li><a href="/logout">ログアウト</a></li>
-                </ul>
-            </div>
-        </div>
+        <h1><a　href="#"><img src="images/main_logo.png" alt="ロゴ"></a></h1>
+
+            <div class="accordion">
+                    <h2 class="accordion-title js-accordion-title">〇さん<img src="images/arrow.png"></h2>
+                    <ul class="accordion-content">
+                        <li><a href="/top">ホーム</a></li>
+                        <li><a href="/profile">プロフィール編集</a></li>
+                        <li><a href="/logout">ログアウト</a></li>
+                     </ul>
+             </div>
     </header>
     <div id="row">
         <div id="container">
@@ -58,7 +61,7 @@
     </div>
     <footer>
     </footer>
-    <script src="JavaScriptファイルのURL"></script>
-    <script src="JavaScriptファイルのURL"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+   <script src="./js/script.js"></script>
 </body>
 </html>

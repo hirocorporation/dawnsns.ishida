@@ -6,7 +6,7 @@
 
 <div id="clear">
 
-  <p>{{ session('username') }}さん</p>
+  <p>〇〇さん</p>
 
 <p>ようこそ！DAWNSNSへ！</p>
 <p>ユーザー登録が完了しました。</p>
