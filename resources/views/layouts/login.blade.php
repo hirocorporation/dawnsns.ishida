@@ -42,6 +42,25 @@
         <div id="container">
             @yield('content')
         </div >
+
+        <!-- 投稿フォームここから記述してみる -->
+
+<div class="wrapper">
+        <form action="/posts/index" method="post">
+            {{ csrf_field() }}
+        <input type="text" name="posts" style="margin: 1rem; padding: 0 1rem; width: 70%; border-radius: 6px; border: 1px solid #ccc; height: 2.3rem;" placeholder="何をつぶやこうか…？">
+        <button type="submit"><img src="images/post.png"></button>
+    </div>
+    </form>
+</div>
+
+ <div class="detail">
+    <p>※投稿内容</p>
+ </div>
+
+        <!-- ここまで -->
+
+
         <div id="side-bar">
             <div id="confirm">
                 <p>〇〇さんの</p>

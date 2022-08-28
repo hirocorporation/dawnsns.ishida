@@ -52,4 +52,12 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/followerList','FollowsController@followerList');
 
     Route::get('/logout', 'Auth\LoginController@logout');
+
+//投稿フォーム作成で以下作成した
+Route::get('/posts/index', 'PostsController@showCreateForm');
+Route::post('/posts/index', 'PostsController@create');
+
+
+//
+
 });
