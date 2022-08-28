@@ -27,16 +27,16 @@
 <body>
     <header>
         <div id = "head">
-        <h1><a　href="#"><img src="images/main_logo.png" alt="ロゴ"></a></h1>
+        <a　class="logo" href="#"><img src="images/main_logo.png" alt="ロゴ"></a>
 
-            <div class="accordion">
-                    <h2 class="accordion-title js-accordion-title">〇さん<img src="images/arrow.png"></h2>
+            <nav>
+                    <h2 class="accordion-title js-accordion-title">{{ session('username') }}〇さん<img src="images/arrow.png"></h2>
                     <ul class="accordion-content">
                         <li><a href="/top">ホーム</a></li>
                         <li><a href="/profile">プロフィール編集</a></li>
                         <li><a href="/logout">ログアウト</a></li>
                      </ul>
-             </div>
+             </nav>
     </header>
     <div id="row">
         <div id="container">
@@ -49,14 +49,17 @@
                 <p>フォロー数</p>
                 <p>〇〇名</p>
                 </div>
-                <p class="btn"><a href="">フォローリスト</a></p>
+                <input type="button" onclick="location.href='/followList'" value="フォローリスト">
                 <div>
                 <p>フォロワー数</p>
                 <p>〇〇名</p>
                 </div>
-                <p class="btn"><a href="">フォロワーリスト</a></p>
+                <input type="button" onclick="location.href='/followerList'" value="フォロワーリスト">
             </div>
-            <p class="btn"><a href="">ユーザー検索</a></p>
+
+
+            <input type="button" onclick="location.href='/search'" value="ユーザー検索">
+
         </div>
     </div>
     <footer>

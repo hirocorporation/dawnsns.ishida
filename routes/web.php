@@ -41,14 +41,15 @@ Route::post('/posts/index', 'PostsController@index');
 
 //ログイン中のページ
 Route::group(['middleware' => 'auth'], function() {
+
     Route::get('/top','PostsController@index');
 
     Route::get('/profile','UsersController@profile');
 
-    Route::get('/search','UsersController@index');
+    Route::get('/search','UsersController@search');
 
-    Route::get('/follow-list','PostsController@index');
-    Route::get('/follower-list','PostsController@index');
+    Route::get('/followList','FollowsController@followList');
+    Route::get('/followerList','FollowsController@followerList');
 
     Route::get('/logout', 'Auth\LoginController@logout');
 });
