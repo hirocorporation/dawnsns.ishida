@@ -54,7 +54,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/logout', 'Auth\LoginController@logout');
 
 //投稿フォーム作成で以下作成した
-Route::get('/posts/index', 'PostsController@showCreateForm');
+Route::get('/top', 'PostsController@showCreateForm');
 Route::post('/posts/index', 'PostsController@create');
 
 

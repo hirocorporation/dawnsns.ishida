@@ -18,19 +18,27 @@ class PostsController extends Controller
     } else {
         return view('auth.login');
     }
+
+    
 }
 
 //ここから↓投稿欄作成に為に描いた
-public function showCreateForm()
+public function showCreateForm (Request $request)
 {
-    return view('posts.index');
+    $post = Post::orderBy('created_at', 'desc')->get();
+    return view('posts.index')->with(['post' =>$post]);
 }
 
 public function create(Request $request){
 
-   $post = new Post;
-        $post->posts = $request->posts;
-        $post->save();
+$validator = $request->validate([
+    'posts' => ['required', 'string', 'max:150'],
+]);
+
+    Post::create([
+        'user_id' => Auth::user()->id,
+        'posts' => $request->posts,
+    ]);
 
     return back();
 }

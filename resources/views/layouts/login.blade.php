@@ -30,7 +30,9 @@
         <a　class="logo" href="#"><img src="images/main_logo.png" alt="ロゴ"></a>
 
             <nav>
-                    <h2 class="accordion-title js-accordion-title">{{ session('username') }}〇さん<img src="images/arrow.png"></h2>
+
+                    <h2 class="accordion-title js-accordion-title"></h1><?php $user = Auth::user(); ?>{{ $user->username }}さん<img src="images/arrow.png"></h2>
+
                     <ul class="accordion-content">
                         <li><a href="/top">ホーム</a></li>
                         <li><a href="/profile">プロフィール編集</a></li>
@@ -43,30 +45,12 @@
             @yield('content')
         </div >
 
-        <!-- 投稿フォームここから記述してみる -->
-
-<div class="wrapper">
-        <form action="/posts/index" method="post">
-            {{ csrf_field() }}
-        <input type="text" name="posts" style="margin: 1rem; padding: 0 1rem; width: 70%; border-radius: 6px; border: 1px solid #ccc; height: 2.3rem;" placeholder="何をつぶやこうか…？">
-        <button type="submit"><img src="images/post.png"></button>
-    </div>
-    </form>
-</div>
-
- <div class="detail">
-    <p>※投稿内容</p>
- </div>
-
-        <!-- ここまで -->
-
-
-        <div id="side-bar">
+         <div id="side-bar">
             <div id="confirm">
-                <p>〇〇さんの</p>
+                <p><?php $user = Auth::user(); ?>{{ $user->username }}さんの</p>
                 <div>
                 <p>フォロー数</p>
-                <p>〇〇名</p>
+                <p>〇名</p>
                 </div>
                 <input type="button" onclick="location.href='/followList'" value="フォローリスト">
                 <div>
@@ -81,6 +65,30 @@
 
         </div>
     </div>
+
+        <!-- 投稿フォームここから記述してみる -->
+
+<div class="wrapper">
+        <form action="/posts/index" method="post">
+            {{ csrf_field() }}
+        <input type="text" name="posts" placeholder="何をつぶやこうか…？">
+        <button type="submit"><img src="images/post.png"></button>
+    </div>
+
+    @if($errors->first('posts'))
+        <p>※{{ $errors->first('posts') }}</p>
+    @endif
+    </form>
+    <div class="posts-wrapper">
+    @foreach($post as $posts)
+        <h1>{{ $posts->posts }} </h1>
+    </div>
+    @endforeach
+
+        <!-- ここまで -->
+
+
+
     <footer>
     </footer>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
