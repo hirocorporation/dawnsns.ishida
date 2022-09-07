@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,18 +26,21 @@
 <body>
     <header>
         <div id = "head">
-        <a　class="logo" href="#"><img src="images/main_logo.png" alt="ロゴ"></a>
+        <a　class="logo"><img src="images/main_logo.png" onclick="location.href='/top'" alt="ロゴ"></a>
 
             <nav>
-
-                    <h2 class="accordion-title js-accordion-title"></h1><?php $user = Auth::user(); ?>{{ $user->username }}さん<img src="images/arrow.png"></h2>
+                <div class="accordion">
+                <div class="accordion-item">
+                    <h3 class="accordion-title js-accordion-title"><?php $user = Auth::user(); ?>{{ $user->username }}さん<img src="images/arrow.png"></h3>
 
                     <ul class="accordion-content">
                         <li><a href="/top">ホーム</a></li>
                         <li><a href="/profile">プロフィール編集</a></li>
                         <li><a href="/logout">ログアウト</a></li>
                      </ul>
-             </nav>
+                </div>
+                </div>
+            </nav>
     </header>
     <div id="row">
         <div id="container">
@@ -65,28 +67,6 @@
 
         </div>
     </div>
-
-        <!-- 投稿フォームここから記述してみる -->
-
-<div class="wrapper">
-        <form action="/posts/index" method="post">
-            {{ csrf_field() }}
-        <input type="text" name="posts" placeholder="何をつぶやこうか…？">
-        <button type="submit"><img src="images/post.png"></button>
-    </div>
-
-    @if($errors->first('posts'))
-        <p>※{{ $errors->first('posts') }}</p>
-    @endif
-    </form>
-    <div class="posts-wrapper">
-    @foreach($post as $posts)
-        <h1>{{ $posts->posts }} </h1>
-    </div>
-    @endforeach
-
-        <!-- ここまで -->
-
 
 
     <footer>

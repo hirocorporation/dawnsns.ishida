@@ -17,39 +17,54 @@ header {
 
 /* アコーディオンメニュー */
 
-
-header nav {
+.accordion {
     margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    max-width: 300px;
+    position: relative;
+    width: 100%;
 }
 
-header .accordion-title {
-    display: flex;
-    position: relative;
+.accordion-title {
     color: #fff;
     cursor: pointer;
     font-size: 16px;
     padding: 10px 20px;
-    background-color: #3C4767;
 }
 
 .accordion-content {
     display: none;
     padding: 10px 20px;
-    background-color: #fff;
-    border-bottom: 1px solid;
-    border-left: 1px solid;
-    border-right: 1px solid;
 }
 
-.accordion-content h2 {
+.accordion-content {
     font-size: 13px;
     line-height: 1.5;
+}
+
+/* タイトルの背景色 */
+.accordion-item .accordion-title {
+    background: #3C4767;
+}
+
+/* コンテンツボックスの枠線 */
+.accordion-item .accordion-content {
+    border-bottom: 2px solid #fff;
+    border-left: 2px solid #fff;
+    border-right: 2px solid #fff;
+}
+
+/* 矢印 */
+.accordion-title {
+    position: relative;
 }
 
 .accordion-title::after {
     border-right: solid 2px #fff;
     border-top: solid 2px #fff;
     content: "";
+    display: block;
     height: 8px;
     position: absolute;
     right: 25px;

@@ -19,10 +19,10 @@ class PostsController extends Controller
         return view('auth.login');
     }
 
-    
+
 }
 
-//ここから↓投稿欄作成に為に描いた
+//ここから↓投稿欄
 public function showCreateForm (Request $request)
 {
     $post = Post::orderBy('created_at', 'desc')->get();
@@ -42,8 +42,6 @@ $validator = $request->validate([
 
     return back();
 }
-
-
 
 // ここまで
 
