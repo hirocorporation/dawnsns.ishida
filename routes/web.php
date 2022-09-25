@@ -19,6 +19,7 @@
 //Auth::routes();
 
 
+
 //ログアウト中のページ
 Route::get('/login', 'Auth\LoginController@login');
 Route::post('/login', 'Auth\LoginController@login');
@@ -50,16 +51,19 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/search', [App\Http\Controllers\UsersController::class, 'search'])
     ->name('users.profile');
 
+     // フォローする/フォロー解除するボタン作成中
+
+    Route::post('/search', 'FollowsController@follow')->name('follow');
+    Route::delete('/search', 'FollowsController@unfollow')->name('unfollow');
+    //
+
     Route::get('/followList','FollowsController@followList');
     Route::get('/followerList','FollowsController@followerList');
 
     Route::get('/logout', 'Auth\LoginController@logout');
 
-//投稿フォーム作成で以下作成した
-Route::get('/top', 'PostsController@showCreateForm');
-Route::post('/posts/index', 'PostsController@create');
-
-
-//
+    //投稿フォーム作成
+    Route::get('/top', 'PostsController@showCreateForm');
+    Route::post('/posts/index', 'PostsController@create');
 
 });

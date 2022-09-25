@@ -22,7 +22,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 
-<!-- 検索フォームここから -->
+<!-- 検索窓 -->
 
 <div>
   <form action="{{ route('users.profile') }}" method="GET">
@@ -31,8 +31,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </form>
 </div>
 
-
-<!-- 検索ここまで -->
+<!-- 検索窓ここまで -->
 
 <table>
 @forelse ($username as $user)
@@ -41,7 +40,23 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <td class="username">{{ $user->username }}
     </td>
 
-<!-- フォローボタン設置 -->
+<!-- フォローする、フォロー解除ボタン設置 -->
+
+@if (auth()->follow()->isFollowing($user->id))
+
+        <form action="{{ route('unfollow', ['id' => $user->id]) }}" method="POST">
+        {{ csrf_field() }}
+        {{ method_field('DELETE') }}
+
+    <button type="submit">フォロー解除</button>
+    </form>
+     @else
+    <form action="{{ route('follow', ['id' => $user->id]) }}" method="POST">
+    {{ csrf_field() }}
+
+    <button type="submit">フォローする</button>
+    </form>
+    @endif
 
  </tr>
 @empty
