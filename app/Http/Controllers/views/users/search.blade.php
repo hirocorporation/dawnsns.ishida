@@ -41,8 +41,8 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </td>
 
 <!-- フォローする、フォロー解除ボタン設置 -->
-  <td>
-   @if (auth()->user()->isFollowing($user->id))
+
+@if (auth()->follow()->isFollowing($user->id))
 
         <form action="{{ route('unfollow', ['id' => $user->id]) }}" method="POST">
         {{ csrf_field() }}
@@ -57,12 +57,13 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <button type="submit">フォローする</button>
     </form>
     @endif
-  </td>
+
  </tr>
 @empty
 <td>No posts!!</td>
 @endforelse
 </table>
+</div>
 
 
 @endsection

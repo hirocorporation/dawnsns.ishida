@@ -25,22 +25,22 @@ class FollowsController extends Controller
     }
 
     // フォローする、解除ボタン作成中
-    public function follow(Follow $user){
-        $follower = auth()->follow();
+    public function follow(Int $id){
+        $follower = auth()->user();
 
-        $is_following = $follower->isFollowing($user->id);
+        $is_following = $follower->isFollowing($id);
         if(!$is_following){
-            $follower->follow($user->id);
+            $follower->follow($id);
             return back();
         }
     }
 
-    public function unfollow(Follow $user){
-        $follower = auth()->follow();
+    public function unfollow(Int $id){
+        $follower = auth()->user();
 
-        $is_following = $follower->isFollowing($user->id);
+        $is_following = $follower->isFollowing($id);
         if($is_following){
-            $follower->unfollow($user->id);
+            $follower->unfollow($id);
             return back();
     }
 }

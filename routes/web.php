@@ -53,8 +53,8 @@ Route::group(['middleware' => 'auth'], function() {
 
      // フォローする/フォロー解除するボタン作成中
 
-    Route::post('/search', 'FollowsController@follow')->name('follow');
-    Route::delete('/search', 'FollowsController@unfollow')->name('unfollow');
+    Route::post('/search/{id}/follow', 'FollowsController@follow')->name('follow');
+    Route::delete('/search/{id}/unfollow', 'FollowsController@unfollow')->name('unfollow');
     //
 
     Route::get('/followList','FollowsController@followList');
