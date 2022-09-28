@@ -29,5 +29,17 @@ class UsersController extends Controller
         return view('users.search', compact('username', 'keyword'));
     }
 
+      // フォロー数/フォロワー数の表示
+    public function show(Follow $follower){
+
+        $follow_count = $follower->getFollowCount($id);
+        $follower_count = $follower->getFollowerCount($id);
+
+        return view('layouts.login', [
+            'follow_count' => $follow_count,
+            'follower_count' => $follower_count
+        ]);
+    }
+
 
 }

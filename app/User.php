@@ -58,4 +58,6 @@ class User extends Authenticatable
             ->followers()->where('follow', $user_id)->first(['follows.id']);
     }
 
+
+
 }

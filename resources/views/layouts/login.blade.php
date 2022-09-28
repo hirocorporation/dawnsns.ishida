@@ -52,12 +52,12 @@
                 <p><?php $user = Auth::user(); ?>{{ $user->username }}さんの</p>
                 <div>
                 <p>フォロー数</p>
-                <p>〇名</p>
+                <p>{{ $follow_count }}名</p>
                 </div>
                 <input type="button" onclick="location.href='/followList'" value="フォローリスト">
                 <div>
                 <p>フォロワー数</p>
-                <p>〇〇名</p>
+                <p>{{ $follower_count }}名</p>
                 </div>
                 <input type="button" onclick="location.href='/followerList'" value="フォロワーリスト">
             </div>

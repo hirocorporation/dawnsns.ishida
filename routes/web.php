@@ -47,6 +47,9 @@ Route::group(['middleware' => 'auth'], function() {
 
     Route::get('/profile','UsersController@profile');
 
+    // サイドバーフォロワー数表示
+    Route::get('/layouts/login', 'UsersController@show');
+
 
     Route::get('/search', [App\Http\Controllers\UsersController::class, 'search'])
     ->name('users.profile');

@@ -24,7 +24,7 @@ class FollowsController extends Controller
         return view('follows.followerList')->with(['post' =>$post]);
     }
 
-    // フォローする、解除ボタン作成中
+    // フォローする、解除ボタン作成
     public function follow(Int $id){
         $follower = auth()->user();
 
@@ -42,7 +42,9 @@ class FollowsController extends Controller
         if($is_following){
             $follower->unfollow($id);
             return back();
+        }
     }
-}
+
+
 
 }
