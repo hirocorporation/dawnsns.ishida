@@ -3,7 +3,7 @@
 @section('content')
 <h2>機能を実装していきましょう。</h2>
 
-        <!-- 投稿フォームここから記述してみる -->
+        <!-- 投稿フォームここから記述 -->
 
 <div class="wrapper">
         <form action="/posts/index" method="post">
@@ -16,6 +16,7 @@
         <p>※{{ $errors->first('posts') }}</p>
     @endif
     </form>
+    
     <div class="posts-wrapper">
     @foreach($post as $posts)
         <h1>{{ $posts->posts }} </h1>

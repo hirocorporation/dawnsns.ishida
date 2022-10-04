@@ -17,11 +17,22 @@ class FollowsController extends Controller
     //
     public function followList(Request $request){
         $post = Post::orderBy('created_at', 'desc')->get();
-        return view('follows.followList')->with(['post' =>$post]);
+
+        // 3.3 サイドバー/フォロー,フォロワー数の表示
+        $follow_count = DB::table('follows')->where('follow',Auth::id())->count();
+        $follower_count = DB::table('follows')->where('follower',Auth::id())->count();
+
+        return view('follows.followList')->with(['post' =>$post], ['follow_count' =>$follow_count], ['follower_count' =>$follower_count]);
     }
+
     public function followerList(Request $request){
         $post = Post::orderBy('created_at', 'desc')->get();
-        return view('follows.followerList')->with(['post' =>$post]);
+
+        // 3.3 サイドバー/フォロー,フォロワー数の表示
+        $follow_count = DB::table('follows')->where('follow',Auth::id())->count();
+        $follower_count = DB::table('follows')->where('follower',Auth::id())->count();
+
+        return view('follows.followerList')->with(['post' =>$post], ['follow_count' =>$follow_count], ['follower_count' =>$follower_count]);
     }
 
     // フォローする、解除ボタン作成
@@ -31,6 +42,7 @@ class FollowsController extends Controller
         $is_following = $follower->isFollowing($id);
         if(!$is_following){
             $follower->follow($id);
+
             return back();
         }
     }
@@ -41,10 +53,8 @@ class FollowsController extends Controller
         $is_following = $follower->isFollowing($id);
         if($is_following){
             $follower->unfollow($id);
+
             return back();
         }
     }
-
-
-
 }

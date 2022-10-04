@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 //投稿フォーム作成で以下追加した
 use App\Http\Controllers\Controller;
 use App\Post;
+use App\Follow;
 //
 
 class PostsController extends Controller
@@ -14,19 +15,27 @@ class PostsController extends Controller
     //
     public function index(){
         if (auth::check()){
-        return view('posts.index');
+
+     // 3.3 サイドバー/フォロー,フォロワー数の表示
+    $follow_count = DB::table('follows')->where('follow',Auth::id())->count();
+    $follower_count = DB::table('follows')->where('follower',Auth::id())->count();
+
+        return view('posts.index')->with(['follow_count' =>$follow_count], ['follower_count' =>$follower_count]);
     } else {
         return view('auth.login');
     }
-
-
 }
 
 //ここから↓投稿欄
 public function showCreateForm (Request $request)
 {
     $post = Post::orderBy('created_at', 'desc')->get();
-    return view('posts.index')->with(['post' =>$post]);
+
+    // 3.3 サイドバー/フォロー,フォロワー数の表示
+    $follow_count = DB::table('follows')->where('follow',Auth::id())->count();
+    $follower_count = DB::table('follows')->where('follower',Auth::id())->count();
+
+    return view('posts.index')->with(['post' =>$post], ['follow_count' =>$follow_count], ['follower_count' =>$follower_count]);
 }
 
 public function create(Request $request){
@@ -42,7 +51,4 @@ $validator = $request->validate([
 
     return back();
 }
-
-// ここまで
-
 }

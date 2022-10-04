@@ -53,9 +53,10 @@ class LoginController extends Controller
     }
 
     public function loggedOut(\Illuminate\Http\Request $request) {
+
         return redirect('login');
     }
 
-    
+
 
 }

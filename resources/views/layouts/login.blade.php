@@ -31,7 +31,9 @@
             <nav>
                 <div class="accordion">
                 <div class="accordion-item">
-                    <h3 class="accordion-title js-accordion-title"><?php $user = Auth::user(); ?>{{ $user->username }}さん<img src="images/arrow.png"></h3>
+                    <h3 class="accordion-title js-accordion-title"><?php $user = Auth::user(); ?>{{ $user->username }}さん</h3>
+                    <img src="images/dawn.png">
+
 
                     <ul class="accordion-content">
                         <li><a href="/top">ホーム</a></li>
