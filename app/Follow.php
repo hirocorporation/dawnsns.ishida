@@ -9,5 +9,5 @@ use Illuminate\Foundation\Auth\Follow as Authenticatable;
 class Follow extends Model
 {
 
-  
+
 }

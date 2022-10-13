@@ -7,16 +7,17 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Follow;
+use Illuminate\Support\Facades\DB;
 
 class UsersController extends Controller
 {
     //
-    public function profile(){
-                            // 3.3 サイドバー/フォロー,フォロワー数の表示
+    public function profile(Request $request){
+
         $follow_count = DB::table('follows')->where('follow',Auth::id())->count();
         $follower_count = DB::table('follows')->where('follower',Auth::id())->count();
 
-        return view('users.profile')->with(['follow_count' =>$follow_count], ['follower_count' =>$follower_count]);
+        return view('users.profile')->with(['follow_count' =>$follow_count, 'follower_count' =>$follower_count]);
 
     }
 
@@ -25,15 +26,17 @@ class UsersController extends Controller
         $keyword = $request->input('keyword');
         $query = User::query();
 
+        $follow_count = DB::table('follows')->where('follow',Auth::id())->count();
+        $follower_count = DB::table('follows')->where('follower',Auth::id())->count();
+
         if(!empty($keyword)) {
             $query->where('username', 'LIKE', "%{$keyword}%");
         }
             $username = $query->get();
 
-            // 3.3 サイドバー/フォロー,フォロワー数の表示
-            $follow_count = DB::table('follows')->where('follow',Auth::id())->count();
-            $follower_count = DB::table('follows')->where('follower',Auth::id())->count();
-
-        return view('users.search', compact('username', 'keyword', 'follow_count', 'follower_count'));
+        return view('users.search', compact('username', 'keyword'))->with(['follow_count' =>$follow_count, 'follower_count' =>$follower_count]);
     }
+
+
+
 }

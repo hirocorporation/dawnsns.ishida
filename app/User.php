@@ -58,6 +58,16 @@ class User extends Authenticatable
             ->followers()->where('follow', $user_id)->first(['follows.id']);
     }
 
+// フォローしたユーザーの投稿を取得
+public function follower_follow()
+    {
+        return $this->belongsToMany('App\User', 'follows', 'follower', 'follow');
+    }
 
+    // フォロー→フォロワー
+    public function follow_follower()
+    {
+        return $this->belongsToMany('App\User', 'follows', 'follow', 'follower');
+    }
 
 }

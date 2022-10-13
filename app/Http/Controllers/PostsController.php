@@ -4,51 +4,61 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-//投稿フォーム作成で以下追加した
 use App\Http\Controllers\Controller;
+use App\User;
 use App\Post;
 use App\Follow;
+use Illuminate\Support\Facades\DB;
 //
 
 class PostsController extends Controller
 {
     //
-    public function index(){
+    public function index(Request $request){
         if (auth::check()){
+            $post = Post::orderBy('created_at', 'desc')->get();
 
-     // 3.3 サイドバー/フォロー,フォロワー数の表示
-    $follow_count = DB::table('follows')->where('follow',Auth::id())->count();
-    $follower_count = DB::table('follows')->where('follower',Auth::id())->count();
+        $follow_count = DB::table('follows')->where('follow',Auth::id())->count();
+        $follower_count = DB::table('follows')->where('follower',Auth::id())->count();
 
-        return view('posts.index')->with(['follow_count' =>$follow_count], ['follower_count' =>$follower_count]);
-    } else {
+        return view('posts.index')->with(['post' =>$post, 'follow_count' => $follow_count, 'follower_count' =>$follower_count]);
+         } else {
         return view('auth.login');
     }
 }
 
-//ここから↓投稿欄
-public function showCreateForm (Request $request)
-{
-    $post = Post::orderBy('created_at', 'desc')->get();
 
-    // 3.3 サイドバー/フォロー,フォロワー数の表示
-    $follow_count = DB::table('follows')->where('follow',Auth::id())->count();
-    $follower_count = DB::table('follows')->where('follower',Auth::id())->count();
+      public function create(Request $request){
 
-    return view('posts.index')->with(['post' =>$post], ['follow_count' =>$follow_count], ['follower_count' =>$follower_count]);
-}
-
-public function create(Request $request){
-
-$validator = $request->validate([
-    'posts' => ['required', 'string', 'max:150'],
-]);
-
-    Post::create([
+        $validator = $request->validate(['posts' => ['required', 'string', 'max:150'],]);
+        Post::create([
         'user_id' => Auth::user()->id,
         'posts' => $request->posts,
-    ]);
+        ]);
 
     return back();
+
+
 }
+
+// フォローしたユーザーの投稿を取得
+
+public function followerTimeline() {
+        $posts = Post::query()->whereIn('user_id', Auth::user()->follows()->pluck('follower'))->orWhere('user_id', Auth::user()->id)->latest()->first();
+
+        $follow_count = DB::table('follows')->where('follow',Auth::id())->count();
+        $follower_count = DB::table('follows')->where('follower',Auth::id())->count();
+
+        return view('follows.followerList')->with(['posts' => $posts, 'follow_count' => $follow_count, 'follower_count' =>$follower_count]);
+    }
+
+public function followTimeline() {
+        $posts = Post::query()->whereIn('user_id', Auth::user()->follows()->pluck('follow'))->orWhere('user_id', Auth::user()->id)->latest()->first();
+
+        $follow_count = DB::table('follows')->where('follow',Auth::id())->count();
+        $follower_count = DB::table('follows')->where('follower',Auth::id())->count();
+
+        return view('follows.followList')->with(['posts' => $posts, 'follow_count' => $follow_count, 'follower_count' =>$follower_count]);
+    }
+
 }

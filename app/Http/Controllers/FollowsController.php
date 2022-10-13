@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Post;
 use App\Follow;
 use App\User;
+use Illuminate\Support\Facades\DB;
 
 //
 
@@ -18,7 +19,6 @@ class FollowsController extends Controller
     public function followList(Request $request){
         $post = Post::orderBy('created_at', 'desc')->get();
 
-        // 3.3 サイドバー/フォロー,フォロワー数の表示
         $follow_count = DB::table('follows')->where('follow',Auth::id())->count();
         $follower_count = DB::table('follows')->where('follower',Auth::id())->count();
 
@@ -28,7 +28,6 @@ class FollowsController extends Controller
     public function followerList(Request $request){
         $post = Post::orderBy('created_at', 'desc')->get();
 
-        // 3.3 サイドバー/フォロー,フォロワー数の表示
         $follow_count = DB::table('follows')->where('follow',Auth::id())->count();
         $follower_count = DB::table('follows')->where('follower',Auth::id())->count();
 

@@ -37,7 +37,8 @@ Route::get('/', function () {
 Route::get('/posts/index', function() {
     // 認証済みのユーザーのみが入れる
 })->middleware('auth');
-Route::post('/posts/index', 'PostsController@index');
+
+Route::post('/posts/index', 'PostsController@create');
 
 
 //ログイン中のページ
@@ -59,10 +60,15 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/followList','FollowsController@followList');
     Route::get('/followerList','FollowsController@followerList');
 
+    Route::get('/followerList','PostsController@followerTimeline');
+    Route::get('/followList','PostsController@followTimeline');
+
+
+
     Route::get('/logout', 'Auth\LoginController@logout');
 
-    //投稿フォーム作成
-    Route::get('/top', 'PostsController@showCreateForm');
-    Route::post('/posts/index', 'PostsController@create');
+
+
+
 
 });
