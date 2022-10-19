@@ -16,23 +16,7 @@ use Illuminate\Support\Facades\DB;
 class FollowsController extends Controller
 {
     //
-    public function followList(Request $request){
-        $post = Post::orderBy('created_at', 'desc')->get();
 
-        $follow_count = DB::table('follows')->where('follow',Auth::id())->count();
-        $follower_count = DB::table('follows')->where('follower',Auth::id())->count();
-
-        return view('follows.followList')->with(['post' =>$post], ['follow_count' =>$follow_count], ['follower_count' =>$follower_count]);
-    }
-
-    public function followerList(Request $request){
-        $post = Post::orderBy('created_at', 'desc')->get();
-
-        $follow_count = DB::table('follows')->where('follow',Auth::id())->count();
-        $follower_count = DB::table('follows')->where('follower',Auth::id())->count();
-
-        return view('follows.followerList')->with(['post' =>$post], ['follow_count' =>$follow_count], ['follower_count' =>$follower_count]);
-    }
 
     // フォローする、解除ボタン作成
     public function follow(Int $id){

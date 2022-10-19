@@ -57,8 +57,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::delete('/search/{id}/unfollow', 'FollowsController@unfollow')->name('unfollow');
     //
 
-    Route::get('/followList','FollowsController@followList');
-    Route::get('/followerList','FollowsController@followerList');
+
 
     Route::get('/followerList','PostsController@followerTimeline');
     Route::get('/followList','PostsController@followTimeline');

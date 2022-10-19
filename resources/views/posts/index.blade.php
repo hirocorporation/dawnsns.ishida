@@ -16,11 +16,10 @@
 </div>
 
 <div class="posts-wrapper">
-    @foreach($post as $posts)
-        <h1>{{ $posts->user->images }}{{ $posts->user->username }}</h1>
-        <span>つぶやいた内容を表示します。</span>
-        <span>{{ $posts->posts }} </span>
-        <p>{{ $posts-> updated_at }}</p>
+    @foreach($posts as $post)
+        <h1>{{ $post->images }}{{ $post->username }}</h1>
+        <span>{{ $post->posts }} </span>
+        <p>{{ $post-> updated_at }}</p>
     @endforeach
 </div>
 
