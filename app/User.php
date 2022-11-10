@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'username', 'mail', 'password',
+        'username', 'mail', 'password', 'bio', 'images'
     ];
 
     /**
@@ -27,7 +27,12 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-// リレーション
+
+    // リレーションの設定。投稿者は複数の投稿を持つ。
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
 
     public function follows()
     {

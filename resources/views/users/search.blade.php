@@ -25,7 +25,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <!-- 検索窓 -->
 
 <div>
-  <form action="{{ route('users.profile') }}" method="GET">
+  <form action="{{ route('users.search') }}" method="GET">
     <input type="text" name="keyword" value="{{ $keyword }}">
     <input type="submit" value="ユーザー名">
 </form>
@@ -36,7 +36,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <table>
 @forelse ($username as $user)
   <tr>
-    <td class="images"><a href="{{ route('users.profile', $user) }}">{{ $user->images }}</td></a>
+    <td class="images"><a href="{{ route('users.profile', ['id' =>$user->id]) }}">{{ $user->images }}</td></a>
     <td class="username">{{ $user->username }}
     </td>
 

@@ -8,31 +8,31 @@
 
 <h2>新規ユーザー登録</h2>
 
-{{ Form::label('ユーザー名') }}
+{{ Form::label('UserName') }}
 {{ Form::text('username',null,['class' => 'input']) }}
 @if ($errors->has('username'))
   <li>{{$errors->first('username')}}</li>
 @endif
 
-{{ Form::label('メールアドレス') }}
+{{ Form::label('MailAdress') }}
 {{ Form::text('mail',null,['class' => 'input']) }}
 @if ($errors->has('mail'))
   <li>{{$errors->first('mail')}}</li>
 @endif
 
-{{ Form::label('パスワード') }}
+{{ Form::label('Password') }}
 {{ Form::text('password',null,['class' => 'input']) }}
 @if ($errors->has('password'))
   <li>{{$errors->first('password')}}</li>
 @endif
 
-{{ Form::label('パスワード確認') }}
+{{ Form::label('Password confirm') }}
 {{ Form::text('password_confirmation',null,['class' => 'input']) }}
 @if ($errors->has('password_confirmation'))
   <li>{{$errors->first('password_confirmation')}}</li>
 @endif
 
-{{ Form::submit('登録') }}
+{{ Form::submit('REGISTER') }}
 
 <p><a href="/login">ログイン画面へ戻る</a></p>
 

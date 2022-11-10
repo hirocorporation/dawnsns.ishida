@@ -7,8 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="description" content="ページの内容を表す文章" />
     <title></title>
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="{{asset('/css/reset.css')}}">
+    <link rel="stylesheet" href="{{asset('/css/style.css')}}">
     <!--スマホ,タブレット対応-->
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <!--サイトのアイコン指定-->
@@ -26,16 +26,18 @@
 <body>
     <header>
         <div id = "head">
-        <a　class="logo"><img src="images/main_logo.png" onclick="location.href='/top'" alt="ロゴ"></a>
+        <a　class="logo"><img src="/images/main_logo.png" onclick="location.href='/top'" alt="ロゴ"></a>
 
             <nav>
                 <div class="accordion">
                 <div class="accordion-item">
-                    <h3 class="accordion-title js-accordion-title"><?php $user = Auth::user(); ?>{{ $user->username }}さん<img src=<?php $user = Auth::user(); ?>{{ $user->images }}></h3>
+                    <h3 class="accordion-title js-accordion-title">
+                        <?php $user = Auth::user(); ?>{{ $user->username }}さん
+                        <img src="/images/{{$user->images}}"></h3>
 
                     <ul class="accordion-content">
                         <li><a href="/top">ホーム</a></li>
-                        <li><a href="/profile">プロフィール編集</a></li>
+                        <li><a href="/posts/profile">プロフィール編集</a></li>
                         <li><a href="/logout">ログアウト</a></li>
                      </ul>
                 </div>
@@ -72,6 +74,6 @@
     <footer>
     </footer>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-   <script src="./js/script.js"></script>
+   <script src="{{ asset('./js/script.js') }}"></script>
 </body>
 </html>

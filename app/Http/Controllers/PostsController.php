@@ -39,7 +39,6 @@ class PostsController extends Controller
 
     return back();
 
-
 }
 
 // フォローしたユーザーの投稿を取得
@@ -48,7 +47,6 @@ public function followerTimeline() {
 
         $follower_id = DB::table('follows')->where('follow',Auth::id())->pluck('follower');
         $posts = DB::table('posts')->join('users','posts.user_id','=','users.id')->where('user_id',Auth::id())->orWhereIn('user_id',$follower_id)->get();
-
 
         $follow_count = DB::table('follows')->where('follow',Auth::id())->count();
         $follower_count = DB::table('follows')->where('follower',Auth::id())->count();

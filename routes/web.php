@@ -1,5 +1,11 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Http;
+
+//追記
+use App\Http\Controllers\UserController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,8 +23,6 @@
 // Route::get('/home', 'HomeController@index')->name('home');
 
 //Auth::routes();
-
-
 
 //ログアウト中のページ
 Route::get('/login', 'Auth\LoginController@login');
@@ -46,28 +50,31 @@ Route::group(['middleware' => 'auth'], function() {
 
     Route::get('/top','PostsController@index');
 
-    Route::get('/profile','UsersController@profile');
+    Route::get('/posts/profile','UsersController@profile');
+    Route::post('/posts/profile', [App\Http\Controllers\UsersController::class, 'profileUpdate'])->name('profile_edit');
 
-    Route::get('/search', [App\Http\Controllers\UsersController::class, 'search'])
+    // 相手のプロフィール
+
+    Route::get('/users/profile/{id}', [App\Http\Controllers\UsersController::class, 'followerProfile'])
     ->name('users.profile');
 
-     // フォローする/フォロー解除するボタン作成中
+     // 相手のプロフィール画面で、フォローする/フォロー解除するボタン作成
+
+    Route::post('/users/profile/{id}/follow', 'FollowsController@follow')->name('follow');
+    Route::delete('/users/profile/{id}/unfollow', 'FollowsController@unfollow')->name('unfollow');
+    //
+
+    Route::get('/search', [App\Http\Controllers\UsersController::class, 'search'])
+    ->name('users.search');
+
+     // フォローする/フォロー解除するボタン作成
 
     Route::post('/search/{id}/follow', 'FollowsController@follow')->name('follow');
     Route::delete('/search/{id}/unfollow', 'FollowsController@unfollow')->name('unfollow');
     //
 
-
-
     Route::get('/followerList','PostsController@followerTimeline');
     Route::get('/followList','PostsController@followTimeline');
 
-
-
     Route::get('/logout', 'Auth\LoginController@logout');
-
-
-
-
-
 });
