@@ -58,14 +58,15 @@ class UsersController extends \App\Http\Controllers\Controller
 
         // 相手のプロフィール
 
-    public function followerProfile($id){
+    public function followerProfile($id, Request $request){
 
         $follow_count = DB::table('follows')->where('follow',Auth::id())->count();
         $follower_count = DB::table('follows')->where('follower',Auth::id())->count();
 
         $user = User::find($id);
+        $posts = DB::table('posts')->join('users','posts.user_id','=','users.id')->where('user_id', $id)->get();
 
-        return view('users.profile', compact('user'))->with([ 'follow_count' =>$follow_count, 'follower_count' =>$follower_count, ]);
+        return view('users.profile', compact('user'))->with([ 'posts' =>$posts, 'follow_count' =>$follow_count, 'follower_count' =>$follower_count, ]);
     }
 
 

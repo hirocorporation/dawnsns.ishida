@@ -32,4 +32,12 @@
   </tbody>
 </table>
 
+<div class="posts-wrapper">
+    @foreach($posts as $post)
+        <h1>{{ $post->images }}{{ $post->username }}</h1>
+        <span>{{ $post->posts }} </span>
+        <p>{{ $post-> updated_at }}</p>
+    @endforeach
+</div>
+
 @endsection
