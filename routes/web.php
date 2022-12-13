@@ -56,9 +56,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('/top', [App\Http\Controllers\PostsController::class, 'postUpdate'])->name('post_edit');
     Route::delete('/top/{id}', [App\Http\Controllers\PostsController::class, 'destroy'])->name('posts.destroy');
 
-
-    // 自分の投稿だけ編集・削除ボタンをつける　ここまで
-
+    // 自分のプロフィール編集
     Route::get('/posts/profile','UsersController@profile');
     Route::post('/posts/profile', [App\Http\Controllers\UsersController::class, 'profileUpdate'])->name('profile_edit');
 

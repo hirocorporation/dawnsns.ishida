@@ -37,8 +37,6 @@ class UsersController extends \App\Http\Controllers\Controller
             'images' => 'file|nullable',
         ]);
 
-
-
         if(!isset($image)){
             $user = Auth::user();
             $user->username = $request->input('username');
@@ -54,8 +52,6 @@ class UsersController extends \App\Http\Controllers\Controller
             $user->bio = $request->input('bio');
             $user->save();
         }
-
-
             return redirect()->route('profile_edit')->with('msg_success', 'プロフィールの更新が完了しました');
     }
 
