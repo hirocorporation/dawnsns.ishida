@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Http;
 
 //追記
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PostsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,7 +49,15 @@ Route::post('/posts/index', 'PostsController@create');
 //ログイン中のページ
 Route::group(['middleware' => 'auth'], function() {
 
-    Route::get('/top','PostsController@index');
+    Route::get('/top', [App\Http\Controllers\PostsController::class, 'index'])->name('posts.index');
+
+
+    // 自分の投稿だけ編集・削除ボタンをつける　ここから
+    Route::post('/top', [App\Http\Controllers\PostsController::class, 'postUpdate'])->name('post_edit');
+    Route::delete('/top/{id}', [App\Http\Controllers\PostsController::class, 'destroy'])->name('posts.destroy');
+
+
+    // 自分の投稿だけ編集・削除ボタンをつける　ここまで
 
     Route::get('/posts/profile','UsersController@profile');
     Route::post('/posts/profile', [App\Http\Controllers\UsersController::class, 'profileUpdate'])->name('profile_edit');

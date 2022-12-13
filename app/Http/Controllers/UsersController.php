@@ -23,7 +23,7 @@ class UsersController extends \App\Http\Controllers\Controller
         $follow_count = DB::table('follows')->where('follow',Auth::id())->count();
         $follower_count = DB::table('follows')->where('follower',Auth::id())->count();
 
-        return view('posts.profile')->with(['user' => $user, 'follow_count' =>$follow_count, 'follower_count' =>$follower_count]);
+        return view('posts.profile')->with(['user' => $user, 'follow_count' =>$follow_count, 'follower_count' =>$follower_count, ]);
 
     }
 
@@ -36,6 +36,8 @@ class UsersController extends \App\Http\Controllers\Controller
             'bio' => 'string|max:200|nullable',
             'images' => 'file|nullable',
         ]);
+
+
 
         if(!isset($image)){
             $user = Auth::user();
@@ -52,6 +54,7 @@ class UsersController extends \App\Http\Controllers\Controller
             $user->bio = $request->input('bio');
             $user->save();
         }
+
 
             return redirect()->route('profile_edit')->with('msg_success', 'プロフィールの更新が完了しました');
     }

@@ -24,37 +24,37 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <!-- 検索窓 -->
 
-<div>
-  <form action="{{ route('users.search') }}" method="GET">
-    <input type="text" name="keyword" value="{{ $keyword }}">
-    <input type="submit" value="ユーザー名">
+
+  <form name="search-window" action="{{ route('users.search') }}" method="GET">
+    <input name="search-window" placeholder="ユーザー名" type="text" name="keyword" value="{{ $keyword }}">
+    <input name="search-button" type="image" type="image" src="/images/search.png">
+     <p class="search-word">検索ワード：{{ $keyword }}</p>
 </form>
-</div>
 
 <!-- 検索窓ここまで -->
 
-<table>
+<table class="search-users">
 @forelse ($username as $user)
-  <tr>
-    <td class="images"><a href="{{ route('users.profile', ['id' =>$user->id]) }}">{{ $user->images }}</td></a>
+  <tr class="search-user">
+    <td class="search-icon"><a href="{{ route('users.profile', ['id' =>$user->id]) }}"><img onclick="location.href='/posts/profile'" name="search-icon" src="/images/{{$user->images}}"></td></a>
     <td class="username">{{ $user->username }}
     </td>
 
 <!-- フォローする、フォロー解除ボタン設置 -->
-  <td>
+  <td class="follow-button">
    @if (auth()->user()->isFollowing($user->id))
 
         <form action="{{ route('unfollow', ['id' => $user->id]) }}" method="POST">
         {{ csrf_field() }}
         {{ method_field('DELETE') }}
 
-    <button type="submit">フォロー解除</button>
+    <button name="unfollow-button" type="submit">フォロー解除</button>
     </form>
      @else
     <form action="{{ route('follow', ['id' => $user->id]) }}" method="POST">
     {{ csrf_field() }}
 
-    <button type="submit">フォローする</button>
+    <button name="follow-button" type="submit">フォローする</button>
     </form>
     @endif
   </td>

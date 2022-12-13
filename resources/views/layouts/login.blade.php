@@ -25,47 +25,56 @@
 </head>
 <body>
     <header>
-        <div id = "head">
-        <a　class="logo"><img src="/images/main_logo.png" onclick="location.href='/top'" alt="ロゴ"></a>
+        <div class="logo">
+        <a class="logo"><img src="/images/main_logo.png" onclick="location.href='/top'" alt="ロゴ"></a>
+</div>
 
-            <nav>
-                <div class="accordion">
-                <div class="accordion-item">
-                    <h3 class="accordion-title js-accordion-title">
-                        <?php $user = Auth::user(); ?>{{ $user->username }}さん
-                        <img src="/images/{{$user->images}}"></h3>
+                <div class="accordion accordion-item">
+                    <!-- 矢印 -->
+                    <div class="accordion-title js-accordion-title">
+
+                    <p class="title-name"> <?php $user = Auth::user(); ?>{{ $user->username }}さん</p> <img name="user-icon" src="/images/{{$user->images}}"></div>
+
 
                     <ul class="accordion-content">
-                        <li><a href="/top">ホーム</a></li>
-                        <li><a href="/posts/profile">プロフィール編集</a></li>
-                        <li><a href="/logout">ログアウト</a></li>
-                     </ul>
+
+                        <li class="accordion-list"><a href="/top">ホーム</a></li>
+                        <li class="accordion-list"><a href="/posts/profile">プロフィール編集</a></li>
+                      <li class="accordion-list"><a href="/logout">ログアウト</a></li>
+
+                    </ul>
+
                 </div>
-                </div>
-            </nav>
+                    <!-- <div class="user-icon">
+                    <img name="user-icon" src="/images/{{$user->images}}">
+                    </div> -->
     </header>
+
     <div id="row">
         <div id="container">
             @yield('content')
         </div >
 
          <div id="side-bar">
-            <div id="confirm">
-                <p><?php $user = Auth::user(); ?>{{ $user->username }}さんの</p>
-                <div>
-                <p>フォロー数</p>
-                <p>{{ $follow_count }}名</p>
-                </div>
-                <input type="button" onclick="location.href='/followList'" value="フォローリスト">
-                <div>
-                <p>フォロワー数</p>
-                <p>{{ $follower_count }}名</p>
-                </div>
-                <input type="button" onclick="location.href='/followerList'" value="フォロワーリスト">
-            </div>
+
+                <p class="follow-title"><?php $user = Auth::user(); ?>{{ $user->username }}さんの</p>
 
 
-            <input type="button" onclick="location.href='/search'" value="ユーザー検索">
+                <ul>
+                <li class="follow-count">フォロー数</li>
+                <li class="follow-count1">{{ $follower_count }}名</li>
+                </ul>
+                <input name="follow-list" type="button" onclick="location.href='/followList'" value="フォローリスト">
+
+                <ul>
+                <li class="follow-count">フォロワー数</p>
+                <li class="follow-count1">{{ $follow_count }}名</li>
+                </ul>
+                <input name="follower-list" type="button" onclick="location.href='/followerList'" value="フォロワーリスト">
+</div>
+            <div  class="search-button">
+
+            <input name="search" type="button" onclick="location.href='/search'" value="ユーザー検索">
 
         </div>
     </div>
@@ -75,5 +84,6 @@
     </footer>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
    <script src="{{ asset('./js/script.js') }}"></script>
+   <script src="modal.js"></script>
 </body>
 </html>

@@ -1,9 +1,108 @@
 @chasert "utf-8";
 
-html{
+html {
     height: 100%;
 }
-body{
+
+header {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+body {
     height: 100%;
-    background: #3C4767;
+    background: -moz-linear-gradient(top, #3C4767, #d2553e);
+    background: -webkit-linear-gradient(top, #3C4767, #d2553e);
+    background: linear-gradient(to bottom, #3C4767, #d2553e);
+}
+
+h1 {
+    font-size: 1.25em;
+    text-align: center;
+
+}
+
+h2 {
+    font-size: 1.5em;
+    text-align: center;
+    color: #FFFFFF;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+p {
+    text-align: center;
+    color: #FFFFFF;
+    margin: 20px;
+}
+
+a {
+    color: #FFFFFF;
+
+}
+
+.new-button {
+    margin: 20px;
+}
+
+.logout-content {
+    background-color: rgba(0, 0, 0, 0.26);
+    padding: 10px;
+    color: #FFFFFF;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    margin-top: 30px;
+}
+
+.container {
+    display: flex;
+    flex-flow: column;
+}
+
+.logout-form {
+    padding: 10px;
+    color: #FFFFFF;
+    display: flex;
+    flex-flow: column;
+
+}
+
+.input {
+    width: auto;
+
+}
+
+.logout-form1 {
+    margin-top: 20px;
+}
+
+.submit-button {
+
+    text-align: right;
+    padding-right: 20px;
+}
+
+.button {
+    color: #FFFFFF;
+    background: #ACCEF7;
+    width: 80px;
+    border: none;
+
+}
+
+.go-login {
+    background: #ACCEF7;
+    color: #FFFFFF;
+    padding: 10px;
+
+}
+
+.welcome-text {
+    line-height: 0.5em
 }

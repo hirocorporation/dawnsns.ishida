@@ -11,7 +11,7 @@ class Post extends Model
         'user_id', 'posts',
     ];
 
-    
+
 
     // 投稿の横にユーザーのアイコンと名前を表示させたい,投稿は一つの投稿者に従属する。
     public function user(){
