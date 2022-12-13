@@ -47,6 +47,14 @@
 
 <!-- モーダル編集 -->
 <div id="modal-content">
+    <form action="{{ route('post_edit',  $post->id) }}" method="post" enctype="multipart/form-data">
+    {{ csrf_field() }}
+        <input type="hidden" name="id" value="{{ $post->id }}" />
+        <textarea name="modal-post">{{ $post->posts }}</textarea><br>
+        <input name="edit-button" type="image" src="/images/edit.png"/>
+    </form>
+</div>
+<!-- <div id="modal-content">
 
     <form action="{{ route('post_edit',  $post->id) }}" method="post" enctype="multipart/form-data">
     {{ csrf_field() }}
@@ -55,7 +63,7 @@
         <input name="edit-button" type="image" src="/images/edit.png"/>
     </form>
 
-</div>
+</div> -->
 
 <!-- モーダル削除 -->
 <div>

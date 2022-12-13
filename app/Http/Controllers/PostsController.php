@@ -30,16 +30,33 @@ class PostsController extends Controller
 }
 
 // 自分の投稿編集
+
     public function postUpdate(Request $request, Post $post)
     {
         $request->validate([
-            'posts' => 'required|string|min:4|max:150',
+            'modal-post' => 'required|string|min:4|max:150',
         ]);
-            $post->posts = $request->input('posts');
-            $post->save();
-
-            return redirect()->route('post_edit')->with('msg_success', 'プロフィールの更新が完了しました');
+        $up_post = $request->input('modal-post');
+        $id = $request->input('id');
+        // dd($up_post);
+        DB::table('posts')
+            ->where('id', $id)
+            ->update(
+                ['posts' => $up_post]
+            );
+        return redirect()->route('post_edit')->with('msg_success', 'プロフィールの更新が完了しました');
     }
+
+    // public function postUpdate(Request $request, Post $post)
+    // {
+    //     $request->validate([
+    //         'posts' => 'required|string|min:4|max:150',
+    //     ]);
+    //         $post->posts = $request->input('posts');
+    //         $post->save();
+
+    //         return redirect()->route('post_edit')->with('msg_success', 'プロフィールの更新が完了しました');
+    // }
 
 // 自分の投稿だけ編集・削除ボタンをつける　ここから
     public function destroy($id){
