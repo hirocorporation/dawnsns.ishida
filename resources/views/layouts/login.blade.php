@@ -19,7 +19,9 @@
     <!--iphoneのアプリアイコン指定-->
     <link rel="apple-touch-icon-precomposed" href="画像のURL" />
     <!--OGPタグ/twitterカード-->
-
+ <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+   <script src="{{ asset('./js/script.js') }}"></script>
+   <script src="modal.js"></script>
 
 
 </head>
@@ -33,12 +35,12 @@
                     <!-- 矢印 -->
                     <div class="accordion-title js-accordion-title">
 
-                    <p class="title-name"> <?php $user = Auth::user(); ?>{{ $user->username }}さん</p> <img name="user-icon" src="/images/{{$user->images}}"></div>
+                    <p class="title-name"> <?php $user = Auth::user(); ?>{{ $user->username }}さん</p> <img name="user-icon" src="{{ asset('storage/images/'.$user->images) }}"></div>
 
 
                     <ul class="accordion-content">
 
-                        <li class="accordion-list"><a href="/top">ホーム</a></li>
+                        <li class="accordion-list"><a href="/top">HOME</a></li>
                         <li class="accordion-list"><a href="/posts/profile">プロフィール編集</a></li>
                       <li class="accordion-list"><a href="/logout">ログアウト</a></li>
 
@@ -82,8 +84,6 @@
 
     <footer>
     </footer>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-   <script src="{{ asset('./js/script.js') }}"></script>
-   <script src="modal.js"></script>
+
 </body>
 </html>

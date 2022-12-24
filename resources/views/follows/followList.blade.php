@@ -5,15 +5,15 @@
 @section('content')
 
 <div class="follow_list">
-<h1>Follow list</h1>
+<h1 class="follower-list">Follow list</h1>
 <div class="follow-icon">
      @foreach($follow_user->unique('follow') as $follow_users)
 @if (Auth::user()->id == $follow_users->follow)
-        <img onclick="location.href='/posts/profile'" name="timeline-icon" src="/images/{{$follow_users->images}}">
+        <img onclick="location.href='/posts/profile'" name="timeline-icon" src="{{ asset('storage/images/'.$follow_users->images) }}">
         {{ csrf_field() }}
 
 @else
-   <a href="{{ route('users.profile', ['id' =>$follow_users->follow]) }}"><img name="timeline-icon" src="/images/{{$follow_users->images}}"></a>
+   <a href="{{ route('users.profile', ['id' =>$follow_users->follow]) }}"><img name="timeline-icon" src="{{ asset('storage/images/'.$follow_users->images) }}"></a>
         {{ csrf_field() }}
 @endif
     @endforeach
@@ -26,7 +26,7 @@
 
     @if (Auth::user()->id == $post->user_id)
     <div class="my-post">
-        <img onclick="location.href='/posts/profile'" name="timeline-icon" src="/images/{{$post->images}}">
+        <img onclick="location.href='/posts/profile'" name="timeline-icon" src="{{ asset('storage/images/'.$post->images) }}">
         {{ csrf_field() }}
 
 <!-- 投稿内容のまとまり -->
@@ -41,7 +41,7 @@
 @else
 
 <div class="other-post">
-   <a href="{{ route('users.profile', ['id' =>$post->user_id]) }}"><img name="timeline-icon" src="/images/{{$post->images}}"></a>
+   <a href="{{ route('users.profile', ['id' =>$post->user_id]) }}"><img name="timeline-icon" src="{{ asset('storage/images/'.$post->images) }}"></a>
         {{ csrf_field() }}
 
 <!-- 投稿内容のまとまり -->

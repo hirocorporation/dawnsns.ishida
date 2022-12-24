@@ -3,11 +3,13 @@
 @section('content')
 
 <div class="edit-form">
-    <form action="{{route('profile_edit')}}" method="post" enctype="multipart/form-data">
+    <form name="edit-form" action="{{route('profile_edit')}}" method="post" enctype="multipart/form-data">
     {{ csrf_field() }}
          <div class="profile-icon">
-                <img name="profile-icon" src="/images/{{$user->images}}">
+                <img name="profile-icon" src="{{ asset('storage/images/'.$user->images) }}">
          </div>
+
+
                 <input type="hidden" name="id" value="{{ $user->id }}" />
          <div class="edit-content">
                 <span class="edit-username">UserName</span><input type="text" name="username" value="{{ $user->username }}" /><br>
@@ -21,7 +23,7 @@
                 @endif
 
                 <span class="edit-password">Password</span><input type="password" name="password1" value="{{ $user->password }}" readonly /><br>
-                <span class="edit-password">new Password</span><input type="password" name="password2" value="{{ $user->password }}" /><br>
+                <span class="edit-password">new Password</span><input type="password" name="password2" placeholder="新しいパスワード" /><br>
                 @if ($errors->has('password2'))
                 <p>{{$errors->first('password2')}}</p>
                 @endif
@@ -33,13 +35,17 @@
                         <p>{{$errors->first('bio')}}</p>
                         @endif
                 </div>
+
                 <div class="form-images">
                         <span class="edit-images">Icon Image</span>
-                                <div class="choice-images">
-                                        <label class="label-images">
-                                        <input type="file" name="images">ファイルを選択</label>
-                                </div><br>
+                         <div class="choice-images">
+                                 <label id="label-images">
+                                {{ csrf_field() }}
+	                        <input type="file" name="images" >
+                                </label>
+                        </div><br>
                 </div>
+
                 <div class="update-button">
                         <input type="submit" name="update-button" value="更新" />
                 </div>

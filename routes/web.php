@@ -53,7 +53,7 @@ Route::group(['middleware' => 'auth'], function() {
 
 
     // 自分の投稿だけ編集・削除ボタンをつける　ここから
-    Route::post('/top', [App\Http\Controllers\PostsController::class, 'postUpdate'])->name('post_edit');
+    Route::post('/post-edit', [App\Http\Controllers\PostsController::class, 'postUpdate'])->name('post_edit');
     Route::delete('/top/{id}', [App\Http\Controllers\PostsController::class, 'destroy'])->name('posts.destroy');
 
     // 自分のプロフィール編集

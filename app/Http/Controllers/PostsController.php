@@ -19,7 +19,6 @@ class PostsController extends Controller
         $follow_id = DB::table('follows')->where('follower',Auth::id())->pluck('follow');
         $posts = DB::table('posts')->join('users','posts.user_id','=','users.id')->where('user_id',Auth::id())->orWhereIn('user_id',$follow_id)->select('posts.*', 'users.username', 'users.images')->get()->sortByDesc('created_at');
 
-
         $follow_count = DB::table('follows')->where('follow',Auth::id())->count();
         $follower_count = DB::table('follows')->where('follower',Auth::id())->count();
 
@@ -31,20 +30,21 @@ class PostsController extends Controller
 
 // 自分の投稿編集
 
-    public function postUpdate(Request $request, Post $post)
+    public function postUpdate(Request $request)
     {
         $request->validate([
             'modal-post' => 'required|string|min:4|max:150',
         ]);
         $up_post = $request->input('modal-post');
         $id = $request->input('id');
+
         // dd($up_post);
         DB::table('posts')
             ->where('id', $id)
             ->update(
                 ['posts' => $up_post]
             );
-        return redirect()->route('post_edit')->with('msg_success', 'プロフィールの更新が完了しました');
+        return redirect('/top');
     }
 
     // public function postUpdate(Request $request, Post $post)
