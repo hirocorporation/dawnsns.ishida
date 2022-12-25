@@ -53,9 +53,7 @@ class RegisterController extends Controller
             'mail' => ['required', 'string', 'email', 'min:4','max:12', 'unique:users'],
             'password' => ['required', 'string', 'min:4', 'max:12','alpha_num', 'unique:users', 'confirmed'],
             'password_confirmation' => ['required']
-        ],
-
-    [
+        ],[
         'username.required' => 'ユーザー名は必須項目です',
         'username.min' => 'ユーザー名は4文字以上で入力してください',
         'username.max' => 'ユーザー名は12文字以内で入力してください',
@@ -71,9 +69,8 @@ class RegisterController extends Controller
         'password.unique' => 'このパスワードは既に使われています。',
 		'password.confirmed' => 'パスワードと確認用パスワードが一致していません',
         'password_confirmation.required' => '確認用パスワードは必須項目です'
-	]
-);
-}
+        ]);
+    }
 
     /**
      * Create a new user instance after a valid registration.
@@ -96,20 +93,15 @@ class RegisterController extends Controller
 
         public function register(Request $request){
         if($request->isMethod('post')){
-
             $data = $request->input();
-
             $this->validator($data)->validate();
-
             $this->create($data);
             session()->put(['username' => $data['username']]);
             return redirect('added');
         }
-
         return view('auth.register');
-    }
-
+        }
          public function added(Request $request){
         return view('auth.added');
-    }
+        }
 }

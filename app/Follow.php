@@ -8,9 +8,6 @@ use Illuminate\Foundation\Auth\Follow as Authenticatable;
 
 class Follow extends Model
 {
-
     protected $fillable = ['follower', 'follow'];
-
     protected $table = 'follows';
-
 }

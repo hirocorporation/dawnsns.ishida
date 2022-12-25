@@ -27,8 +27,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-
-    // リレーションの設定。投稿者は複数の投稿を持つ。
+    // 投稿者は複数の投稿を持つことを意味する記述
     public function posts()
     {
         return $this->hasMany(Post::class);
@@ -39,19 +38,18 @@ class User extends Authenticatable
         return $this->belongsToMany(self::class, 'follows', 'follower', 'follow');
     }
 
-        // フォローする
+    // フォローする、フォロー解除する
     public function follow(Int $user_id)
     {
         return $this->follows()->attach($user_id);
     }
 
-    // フォロー解除する
     public function unfollow(Int $user_id)
     {
         return $this->follows()->detach($user_id);
     }
 
-    // フォローしているか
+    // フォローしているか、フォローされているか
     public function isFollowing(Int $user_id)
     {
         return (bool) $this->follows()->where('follow', $user_id)->first(['follows.id']);
@@ -63,13 +61,13 @@ class User extends Authenticatable
             ->followers()->where('follow', $user_id)->first(['follows.id']);
     }
 
-// フォローしたユーザーの投稿を取得
-public function follower_follow()
+    // フォローしたユーザーの投稿を取得
+    public function follower_follow()
     {
         return $this->belongsToMany('App\User', 'follows', 'follower', 'follow');
     }
 
-    // フォロー→フォロワー
+    // フォローされているユーザーの投稿を取得
     public function follow_follower()
     {
         return $this->belongsToMany('App\User', 'follows', 'follow', 'follower');
