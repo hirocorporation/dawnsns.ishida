@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="other-users">
-  <a href="{{ route('users.profile', ['id' =>$user->id]) }}"><img name="search-icon" src="/images/{{$user->images}}"></a>
+  <a href="{{ route('users.profile', ['id' =>$user->id]) }}"><img name="search-icon" src="{{ asset('storage/images/'.$user->images) }}"></a>
     <div class="name-bio">
       <div class="other-username">
         <p class="other-username1">Name</p><p class="other-username2" >{{ $user->username }}</p>
@@ -30,7 +30,7 @@
 <div class="posts-wrapper">
   @foreach($posts as $post)
     <div class="other-post">
-      <a href="{{ route('users.profile', ['id' =>$user->id]) }}"><img name="timeline-icon" src="/images/{{$user->images}}"></a>
+      <a href="{{ route('users.profile', ['id' =>$user->id]) }}"><img name="timeline-icon" src="{{ asset('storage/images/'.$user->images) }}"></a>
       {{ csrf_field() }}
       <ul class="post-content">
         <li class="timeline-name">{{ $post->username }}</li>
